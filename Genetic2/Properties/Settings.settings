@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Genetic2.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TargetPicture" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\temp\DNA\GWB.bmp</Value>
+    </Setting>
+    <Setting Name="ImageDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\temp\DNA\evolution</Value>
+    </Setting>
+    <Setting Name="CurrentGenerationPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\temp\DNA\currentGeneration.csx</Value>
+    </Setting>
+    <Setting Name="TemplateFilePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\temp\DNA\template.csx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

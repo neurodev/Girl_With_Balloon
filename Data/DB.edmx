@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EvolutionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FamilyTree">
+          <Key>
+            <PropertyRef Name="Generation" />
+            <PropertyRef Name="Child" />
+          </Key>
+          <Property Name="Generation" Type="bigint" Nullable="false" />
+          <Property Name="Child" Type="int" Nullable="false" />
+          <Property Name="RunTime" Type="bigint" Nullable="false" />
+          <Property Name="LinesOfCode" Type="bigint" Nullable="false" />
+          <Property Name="Score" Type="bigint" Nullable="false" />
+          <Property Name="WasSuccessful" Type="bit" Nullable="false" />
+        </EntityType>
+        <Function Name="GenerationsBeforeSuccess" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GraphData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="EvolutionModelStoreContainer">
+          <EntitySet Name="FamilyTree" EntityType="Self.FamilyTree" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EvolutionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FamilyTree">
+          <Key>
+            <PropertyRef Name="Generation" />
+            <PropertyRef Name="Child" />
+          </Key>
+          <Property Name="Generation" Type="Int64" Nullable="false" />
+          <Property Name="Child" Type="Int32" Nullable="false" />
+          <Property Name="RunTime" Type="Int64" Nullable="false" />
+          <Property Name="LinesOfCode" Type="Int64" Nullable="false" />
+          <Property Name="Score" Type="Int64" Nullable="false" />
+          <Property Name="WasSuccessful" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="EvolutionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FamilyTrees" EntityType="Self.FamilyTree" />
+          <FunctionImport Name="GenerationsBeforeSuccess" ReturnType="Collection(EvolutionModel.GenerationsBeforeSuccess_Result)" />
+          <FunctionImport Name="GraphData" ReturnType="Collection(EvolutionModel.GraphData_Result)" />
+        </EntityContainer>
+        <ComplexType Name="GenerationsBeforeSuccess_Result">
+          <Property Type="Int64" Name="RowNumber" Nullable="true" />
+          <Property Type="Int64" Name="Generation" Nullable="false" />
+          <Property Type="Int64" Name="GenerationsBeforeSuccess" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GraphData_Result">
+          <Property Type="Int64" Name="Score" Nullable="true" />
+          <Property Type="Int64" Name="Generation" Nullable="false" />
+          <Property Type="Boolean" Name="WasSuccessful" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EvolutionModelStoreContainer" CdmEntityContainer="EvolutionEntities">
+          <EntitySetMapping Name="FamilyTrees">
+            <EntityTypeMapping TypeName="EvolutionModel.FamilyTree">
+              <MappingFragment StoreEntitySet="FamilyTree">
+                <ScalarProperty Name="Generation" ColumnName="Generation" />
+                <ScalarProperty Name="Child" ColumnName="Child" />
+                <ScalarProperty Name="RunTime" ColumnName="RunTime" />
+                <ScalarProperty Name="LinesOfCode" ColumnName="LinesOfCode" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="WasSuccessful" ColumnName="WasSuccessful" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GenerationsBeforeSuccess" FunctionName="EvolutionModel.Store.GenerationsBeforeSuccess">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EvolutionModel.GenerationsBeforeSuccess_Result">
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+                <ScalarProperty Name="Generation" ColumnName="Generation" />
+                <ScalarProperty Name="GenerationsBeforeSuccess" ColumnName="GenerationsBeforeSuccess" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GraphData" FunctionName="EvolutionModel.Store.GraphData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EvolutionModel.GraphData_Result">
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Generation" ColumnName="Generation" />
+                <ScalarProperty Name="WasSuccessful" ColumnName="WasSuccessful" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
